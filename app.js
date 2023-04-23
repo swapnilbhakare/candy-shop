@@ -21,12 +21,11 @@ function addCandy(e) {
     // console.log(candies);
     axios
       .post(
-        `https://crudcrud.com/api/ef351ecf0e654e4b997fe03b5e7d8851/CandyStock`,
+        `https://crudcrud.com/api/633d35fe743342ac853c70fa94f4f970/CandyStock`,
         candies
       )
       .then((response) => {
-        console.log(response.data);
-        showCandies();
+        showCandies(response);
       })
       .catch((err) => {
         console.log(err);
@@ -39,25 +38,19 @@ function showCandies() {
   const canndyList = document.getElementById("candyStockList");
   canndyList.innerHTML = "";
   axios
-    .get(`https://crudcrud.com/api/ef351ecf0e654e4b997fe03b5e7d8851/CandyStock`)
+    .get(`https://crudcrud.com/api/633d35fe743342ac853c70fa94f4f970/CandyStock`)
     .then((response) => {
       for (let i = 0; i < response.data.length; i++) {
         canndyList.innerHTML += `
             <li>
-            ${response.data[i].candyName} : ${response.data[i].description} : ${
-          response.data[i].price
-        } : ${response.data[i].quantity}
-           
-<input type="button"value="BuyOne" id="buyone" onclick=" candyCount(${
-          response.data[i].quantity - 1
-        } )"  />
-<input type="button"value="BuyOne" onclick="candyCount('${
-          response.data[i]._id
-        }', ${response.data[i].quantity - 2} )"  />
-<input type="button"value="BuyOne" onclick="candyCount('${
-          response.data[i]._id
-        }', ${response.data[i].quantity - 3} )"  />
-      
+            <span> 
+            ${response.data[i].candyName} :  ${response.data[i].description} : ${response.data[i].price} : ${response.data[i].quantity}
+           <div>
+            <span>
+                <input type="button"value="BuyOne" class="btn" id="buyone" onclick="buyOne('${response.data[i]._id}','${response.data[i].candyName}','${response.data[i].description}','${response.data[i].price}','${response.data[i].quantity}')"  />
+                <input type="button"value="BuyTwo" class="btn"  onclick="buyTwo('${response.data[i]._id}','${response.data[i].candyName}','${response.data[i].description}','${response.data[i].price}','${response.data[i].quantity}')" />
+                <input type="button"value="BuyThree" class="btn"  onclick="buyThree('${response.data[i]._id}','${response.data[i].candyName}','${response.data[i].description}','${response.data[i].price}','${response.data[i].quantity}')" />            
+            <div>
              </li>
 
             `;
@@ -67,21 +60,55 @@ function showCandies() {
       console.log(err);
     });
 }
-
-function candyCount(_id, quantity) {
-  //   let temp = quantity - 1;
-
-  //   console.log(data.quantity);
-  axios
+const buyOne = async (id, candyName, description, price, quantity) => {
+  await axios
     .put(
-      `https://crudcrud.com/api/ef351ecf0e654e4b997fe03b5e7d8851/CandyStock/${_id}`,
-      quantity
+      `https://crudcrud.com/api/633d35fe743342ac853c70fa94f4f970/CandyStock/${id}`,
+
+      {
+        candyName,
+        description,
+        price,
+        quantity: quantity - 1,
+      }
     )
     .then((response) => {
-      console.log(response.data);
+      showCandies(response);
+    })
+    .catch((err) => console.log(err));
+};
+const buyTwo = async (id, candyName, description, price, quantity) => {
+  await axios
+    .put(
+      `https://crudcrud.com/api/633d35fe743342ac853c70fa94f4f970/CandyStock/${id}`,
 
-      showUsers();
-    });
-}
+      {
+        candyName,
+        description,
+        price,
+        quantity: quantity - 2,
+      }
+    )
+    .then((response) => {
+      showCandies(response);
+    })
+    .catch((err) => console.log(err));
+};
+const buyThree = async (id, candyName, description, price, quantity) => {
+  await axios
+    .put(
+      `https://crudcrud.com/api/633d35fe743342ac853c70fa94f4f970/CandyStock/${id}`,
 
+      {
+        candyName,
+        description,
+        price,
+        quantity: quantity - 3,
+      }
+    )
+    .then((response) => {
+      showCandies(response);
+    })
+    .catch((err) => console.log(err));
+};
 showCandies();
