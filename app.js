@@ -45,12 +45,12 @@ function showCandies() {
             <li>
             <span> 
             ${response.data[i].candyName} :  ${response.data[i].description} : ${response.data[i].price} : ${response.data[i].quantity}
-           <div>
+           </span>
             <span>
                 <input type="button"value="BuyOne" class="btn" id="buyone" onclick="buyOne('${response.data[i]._id}','${response.data[i].candyName}','${response.data[i].description}','${response.data[i].price}','${response.data[i].quantity}')"  />
                 <input type="button"value="BuyTwo" class="btn"  onclick="buyTwo('${response.data[i]._id}','${response.data[i].candyName}','${response.data[i].description}','${response.data[i].price}','${response.data[i].quantity}')" />
                 <input type="button"value="BuyThree" class="btn"  onclick="buyThree('${response.data[i]._id}','${response.data[i].candyName}','${response.data[i].description}','${response.data[i].price}','${response.data[i].quantity}')" />            
-            <div>
+            </span>
              </li>
 
             `;

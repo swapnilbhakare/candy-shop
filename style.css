@@ -189,7 +189,7 @@ main .header h4 {
 }
 
 .container #myForm div{
-    width: 500px;
+    width: 600px;
     margin: 10px;
 }
 .container #myForm input{
@@ -203,27 +203,22 @@ main .header h4 {
     border: 1px solid var(--smoke);
     color: var(--pure);
 }
+
 #candyStockList {
+    width: 600px;
+    margin: 10px;
     list-style: none;
     margin-top: 10px;
-    width: 600px;
     text-align: center;
     align-items: center;
-    
 }
 #candyStockList li{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
     text-align: left;
     border: 1px solid var(--smoke);
     padding: 5px;
     border-radius: 5px;
-    width: 400px;
-
+    margin-top: 10px;
     
-
 }
 #candyStockList li div{
     margin: 10px;
